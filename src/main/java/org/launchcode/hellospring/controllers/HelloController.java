@@ -11,15 +11,30 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class HelloController {
 
-    @RequestMapping(value="")
+    @RequestMapping(value = "")
     @ResponseBody
     public String index(HttpServletRequest request) {
 
         String name = request.getParameter("name");
 
-        return "Hello " + name;
+        if (name == null) {
+            name = "World";
+        }
 
+        return "Hello " + name;
     }
+    @RequestMapping(value = "hello")
+    @ResponseBody
+    public String helloForm() {
+
+        String html = "form method='post'>" +
+                "<input type='text' name='name'/>" +
+                "in[ut type='submit' value='Greet Me!'" +
+                "</form>";
+
+        return html;
+    }
+
 
     @RequestMapping(value= "goodbye")
     @ResponseBody
